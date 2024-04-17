@@ -8,6 +8,7 @@ type Props = {
   isObscure?: boolean;
   onChangeText?: ((text: string) => void) | undefined;
   value?: string | undefined;
+  mb4?: boolean;
 };
 
 const Input = ({
@@ -16,6 +17,7 @@ const Input = ({
   isObscure,
   onChangeText,
   value,
+  mb4,
 }: Props) => {
   return (
     <>
@@ -24,7 +26,9 @@ const Input = ({
       </Text>
 
       <TextInput
-        className="w-full h-[56px] bg-white border-[1px] border-graysFour rounded-xl px-4 text-[16px] font-satoshiRegular"
+        className={`w-full h-[56px] bg-white border-[1px] border-graysFour rounded-xl px-4 text-[16px] font-satoshiRegular ${
+          mb4 ? 'mb-4' : ''
+        }`}
         placeholderTextColor={colors.graysTwo}
         placeholder={placeholder}
         autoCapitalize="none"
