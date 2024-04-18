@@ -1,14 +1,28 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import { colors } from '../../../theme/colors';
+import { StackTypes } from '../../../types/navigation';
 
 const CreateAccount = () => {
+  const navigation = useNavigation<StackTypes>();
+
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
+  const handleSuccessCreate = () => {
+    navigation.navigate('CreateAccountSuccess');
+  };
+
   return (
     <ScrollView className="flex-1 px-6 pt-6 bg-black">
-      <TouchableOpacity className="flex-row gap-x-[7px] items-center pb-6">
+      <TouchableOpacity
+        className="flex-row gap-x-[7px] items-center pb-6"
+        onPress={handleGoBack}>
         <Icon
           name="arrow-back-outline"
           color={colors.secondaryDefault}
@@ -35,7 +49,11 @@ const CreateAccount = () => {
         <Input label="Senha" placeholder="Digite sua senha" isObscure />
       </View>
 
-      <Button isOutline={false} label="Criar minha conta" />
+      <Button
+        isOutline={false}
+        label="Criar minha conta"
+        onPress={handleSuccessCreate}
+      />
     </ScrollView>
   );
 };

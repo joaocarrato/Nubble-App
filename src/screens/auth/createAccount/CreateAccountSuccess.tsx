@@ -1,9 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, View } from 'react-native';
 import Button from '../../../components/Button';
 import CheckRound from '../../../components/svg/CheckRound';
+import { StackTypes } from '../../../types/navigation';
 
 const CreateAccountSuccess = () => {
+  const navigation = useNavigation<StackTypes>();
+
+  const handleNavigation = () => {
+    navigation.pop(2);
+  };
+
   return (
     <View className="flex-1 bg-black pt-[40px] px-6">
       <CheckRound />
@@ -16,7 +24,11 @@ const CreateAccountSuccess = () => {
         Agora é só fazer login na nossa plataforma.
       </Text>
 
-      <Button isOutline={false} label="Voltar ao início" />
+      <Button
+        isOutline={false}
+        label="Voltar ao início"
+        onPress={handleNavigation}
+      />
     </View>
   );
 };

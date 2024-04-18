@@ -1,9 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
+import { StackTypes } from '../../../types/navigation';
 
 const Login = () => {
+  const navigation = useNavigation<StackTypes>();
+
+  const handleCreateAccount = () => {
+    navigation.navigate('CreateAccount');
+  };
+
   return (
     <ScrollView className="flex-1 pt-10 px-6 bg-black" scrollEnabled={false}>
       <Text className="font-satoshiRegular font-black text-white text-3xl">
@@ -30,7 +38,11 @@ const Login = () => {
       <Button isOutline={false} label="Entrar" />
 
       <View className="mb-3" />
-      <Button isOutline label="Criar minha conta" />
+      <Button
+        isOutline
+        label="Criar minha conta"
+        onPress={handleCreateAccount}
+      />
     </ScrollView>
   );
 };
