@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Button from '../../../components/Button';
-import Input from '../../../components/Input';
+import InputText from '../../../components/Input/InputText';
 import { StackTypes } from '../../../types/navigation';
 
 const Login = () => {
@@ -22,11 +22,20 @@ const Login = () => {
       </Text>
 
       <View className="mt-10 mb-2">
-        <Input label="E-mail" placeholder="Digite seu e-mail" />
+        <InputText
+          mb4
+          label="E-mail"
+          placeholder="Digite seu e-mail"
+          autoCapitalize="none"
+          keyboardType="email-address"
+        />
 
-        <View className="mt-4" />
-
-        <Input label="Senha" placeholder="Digite sua senha" isObscure />
+        <InputText
+          label="Senha"
+          placeholder="Digite sua senha"
+          secureTextEntry
+          autoCapitalize="none"
+        />
       </View>
 
       <TouchableOpacity className="mb-12">

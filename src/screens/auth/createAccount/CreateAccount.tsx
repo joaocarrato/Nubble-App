@@ -44,14 +44,6 @@ const CreateAccount = () => {
       </Text>
 
       <View className="mb-12">
-        {/* <Input
-          label="Seu username"
-          placeholder="@"
-          mb4
-          value={username}
-          onChangeText={username => setUsername(username)}
-        /> */}
-
         <InputText
           mb4
           label="Seu username"
@@ -70,6 +62,7 @@ const CreateAccount = () => {
           label="E-mail"
           placeholder="Digite seu e-mail"
           autoCapitalize="none"
+          keyboardType="email-address"
         />
 
         <InputText
