@@ -17,7 +17,7 @@ module.exports = {
         secondaryLight: '#FAE6DD',
         successDefault: '#4ABC86',
         successLight: '#D8FFEC',
-        errorDefault: '#D8FFEC',
+        errorDefault: '#EA3838',
         errorLight: '#FBECEC',
       },
       fontFamily: {

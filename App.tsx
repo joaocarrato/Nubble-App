@@ -2,9 +2,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import CreateAccount from './src/screens/auth/createAccount/CreateAccount';
-import CreateAccountSuccess from './src/screens/auth/createAccount/CreateAccountSuccess';
-import Login from './src/screens/auth/login/Login';
+import CreateAccount from './src/screens/auth/CreateAccount/CreateAccount';
+import CreateAccountSuccess from './src/screens/auth/CreateAccount/CreateAccountSuccess';
+import Login from './src/screens/auth/Login/Login';
 
 const Stack = createStackNavigator();
 

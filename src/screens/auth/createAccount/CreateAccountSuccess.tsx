@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Text, View } from 'react-native';
 import Button from '../../../components/Button';
-import CheckRound from '../../../components/svg/CheckRound';
+import CheckRound from '../../../components/Svg/CheckRound';
 import { StackTypes } from '../../../types/navigation';
 
 const CreateAccountSuccess = () => {

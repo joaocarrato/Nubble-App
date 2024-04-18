@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { colors } from '../theme/colors';
 
 type Props = {
@@ -25,17 +25,17 @@ const Input = ({
         {label}
       </Text>
 
-      <TextInput
-        className={`w-full h-[56px] bg-white border-[1px] border-graysFour rounded-xl px-4 text-[16px] font-satoshiRegular ${
-          mb4 ? 'mb-4' : ''
-        }`}
-        placeholderTextColor={colors.graysTwo}
-        placeholder={placeholder}
-        autoCapitalize="none"
-        secureTextEntry={isObscure}
-        value={value}
-        onChangeText={onChangeText}
-      />
+      <View className={`${mb4 ? 'mb-4' : ''}`}>
+        <TextInput
+          className={`w-full h-[56px] bg-white border-[1px] border-graysFour rounded-xl px-4 text-[16px] font-satoshiRegular`}
+          placeholderTextColor={colors.graysTwo}
+          placeholder={placeholder}
+          autoCapitalize="none"
+          secureTextEntry={isObscure}
+          value={value}
+          onChangeText={onChangeText}
+        />
+      </View>
     </>
   );
 };

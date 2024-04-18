@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../../components/Button';
-import Input from '../../../components/Input';
+import InputText from '../../../components/Input/InputText';
 import { colors } from '../../../theme/colors';
 import { StackTypes } from '../../../types/navigation';
 
@@ -44,33 +44,39 @@ const CreateAccount = () => {
       </Text>
 
       <View className="mb-12">
-        <Input
+        {/* <Input
           label="Seu username"
           placeholder="@"
           mb4
           value={username}
           onChangeText={username => setUsername(username)}
+        /> */}
+
+        <InputText
+          mb4
+          label="Seu username"
+          placeholder="@"
+          autoCapitalize="none"
         />
-        <Input
-          label="Nome completo"
+
+        <InputText
+          mb4
+          label="Nome Completo"
           placeholder="Digite seu nome completo"
-          mb4
-          value={name}
-          onChangeText={name => setName(name)}
         />
-        <Input
+
+        <InputText
+          mb4
           label="E-mail"
-          placeholder="Digite seu email"
-          mb4
-          value={email}
-          onChangeText={email => setEmail(email)}
+          placeholder="Digite seu e-mail"
+          autoCapitalize="none"
         />
-        <Input
+
+        <InputText
           label="Senha"
           placeholder="Digite sua senha"
-          isObscure
-          value={password}
-          onChangeText={password => setPassword(password)}
+          autoCapitalize="none"
+          secureTextEntry
         />
       </View>
 
