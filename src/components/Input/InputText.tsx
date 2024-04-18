@@ -1,19 +1,22 @@
 import React from 'react';
+import { FieldError } from 'react-hook-form';
 import { Text, TextInput, TextInputProps, View } from 'react-native';
 import { colors } from '../../theme/colors';
 
-type InputTextProps = {
-  error?: boolean;
+interface InputTextProps extends TextInputProps {
+  error?: FieldError | undefined;
   mb4?: boolean;
   label?: string;
-};
+  errorMessage?: string;
+}
 
-const InputText = ({
-  label,
-  error = false,
+export function InputText({
+  error,
   mb4,
+  label,
+  errorMessage,
   ...restProps
-}: InputTextProps & TextInputProps) => {
+}: InputTextProps) {
   return (
     <View className={`${mb4 ? 'mb-4' : ''}`}>
       <Text className="font-satoshiRegular text-base font-medium text-white mb-1">
@@ -30,11 +33,9 @@ const InputText = ({
 
       {error && (
         <Text className="text-sm text-errorDefault font-satoshiRegular font-bold pt-1">
-          error
+          {errorMessage}
         </Text>
       )}
     </View>
   );
-};
-
-export default InputText;
+}

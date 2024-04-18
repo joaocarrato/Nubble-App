@@ -1,17 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../../components/Button';
-import InputText from '../../../components/Input/InputText';
+import { InputText } from '../../../components/Input/InputText';
 import { colors } from '../../../theme/colors';
 import { StackTypes } from '../../../types/navigation';
+import { emailRegex } from '../../../utils/regex';
+
+interface FormProps {
+  username?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+}
 
 const CreateAccount = () => {
-  const [username, setUsername] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormProps>();
 
   const navigation = useNavigation<StackTypes>();
 
@@ -21,6 +31,11 @@ const CreateAccount = () => {
 
   const handleSuccessCreate = () => {
     navigation.navigate('CreateAccountSuccess');
+  };
+
+  const onSubmit: SubmitHandler<FormProps> = data => {
+    console.log(data);
+    handleSuccessCreate();
   };
 
   return (
@@ -44,39 +59,82 @@ const CreateAccount = () => {
       </Text>
 
       <View className="mb-12">
-        <InputText
-          mb4
-          label="Seu username"
-          placeholder="@"
-          autoCapitalize="none"
+        <Controller
+          control={control}
+          name="username"
+          rules={{
+            required: true,
+            validate: value => value?.includes('@'),
+          }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              mb4
+              label="Seu username"
+              placeholder="@"
+              autoCapitalize="none"
+              onChangeText={onChange}
+              error={errors.username}
+              errorMessage="Digite um username válido"
+            />
+          )}
         />
 
-        <InputText
-          mb4
-          label="Nome Completo"
-          placeholder="Digite seu nome completo"
+        <Controller
+          control={control}
+          name="name"
+          rules={{ required: true, minLength: 3 }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              mb4
+              label="Nome Completo"
+              placeholder="Digite seu nome completo"
+              onChangeText={onChange}
+              error={errors.name}
+              errorMessage="Digite um nome válido"
+            />
+          )}
         />
 
-        <InputText
-          mb4
-          label="E-mail"
-          placeholder="Digite seu e-mail"
-          autoCapitalize="none"
-          keyboardType="email-address"
+        <Controller
+          control={control}
+          name="email"
+          rules={{ required: true, pattern: emailRegex }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              mb4
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              onChangeText={onChange}
+              error={errors.email}
+              errorMessage="Digite um e-mail válido"
+            />
+          )}
         />
 
-        <InputText
-          label="Senha"
-          placeholder="Digite sua senha"
-          autoCapitalize="none"
-          secureTextEntry
+        <Controller
+          control={control}
+          name="password"
+          rules={{ required: true, minLength: 8 }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              label="Senha"
+              placeholder="Digite sua senha"
+              autoCapitalize="none"
+              secureTextEntry
+              onChangeText={onChange}
+              error={errors.password}
+              errorMessage="Digite uma senha válida"
+            />
+          )}
         />
       </View>
 
       <Button
         isOutline={false}
         label="Criar minha conta"
-        onPress={handleSuccessCreate}
+        onPress={handleSubmit(onSubmit)}
       />
     </ScrollView>
   );

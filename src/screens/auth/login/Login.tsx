@@ -1,15 +1,33 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Button from '../../../components/Button';
-import InputText from '../../../components/Input/InputText';
+import { InputText } from '../../../components/Input/InputText';
 import { StackTypes } from '../../../types/navigation';
+import { emailRegex } from '../../../utils/regex';
+
+interface FormProps {
+  email?: string;
+  password?: string;
+}
 
 const Login = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormProps>();
+
   const navigation = useNavigation<StackTypes>();
 
   const handleCreateAccount = () => {
     navigation.navigate('CreateAccount');
+  };
+
+  const onSubmit: SubmitHandler<FormProps> = data => {
+    //TODO
+    console.log(data);
   };
 
   return (
@@ -22,19 +40,39 @@ const Login = () => {
       </Text>
 
       <View className="mt-10 mb-2">
-        <InputText
-          mb4
-          label="E-mail"
-          placeholder="Digite seu e-mail"
-          autoCapitalize="none"
-          keyboardType="email-address"
+        <Controller
+          control={control}
+          name="email"
+          rules={{ required: true, pattern: emailRegex }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              mb4
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              onChangeText={onChange}
+              error={errors.email}
+              errorMessage="Digite um e-mail válido"
+            />
+          )}
         />
 
-        <InputText
-          label="Senha"
-          placeholder="Digite sua senha"
-          secureTextEntry
-          autoCapitalize="none"
+        <Controller
+          control={control}
+          name="password"
+          rules={{ required: true, minLength: 8 }}
+          render={({ field: { onChange } }) => (
+            <InputText
+              label="Senha"
+              placeholder="Digite sua senha"
+              secureTextEntry
+              autoCapitalize="none"
+              onChangeText={onChange}
+              error={errors.password}
+              errorMessage="Digite uma senha válida"
+            />
+          )}
         />
       </View>
 
@@ -44,7 +82,11 @@ const Login = () => {
         </Text>
       </TouchableOpacity>
 
-      <Button isOutline={false} label="Entrar" />
+      <Button
+        isOutline={false}
+        label="Entrar"
+        onPress={handleSubmit(onSubmit)}
+      />
 
       <View className="mb-3" />
       <Button
