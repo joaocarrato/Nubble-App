@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Button from '../../../components/Button';
@@ -8,6 +8,11 @@ import { colors } from '../../../theme/colors';
 import { StackTypes } from '../../../types/navigation';
 
 const CreateAccount = () => {
+  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const navigation = useNavigation<StackTypes>();
 
   const handleGoBack = () => {
@@ -39,14 +44,34 @@ const CreateAccount = () => {
       </Text>
 
       <View className="mb-12">
-        <Input label="Seu username" placeholder="@" mb4 />
+        <Input
+          label="Seu username"
+          placeholder="@"
+          mb4
+          value={username}
+          onChangeText={username => setUsername(username)}
+        />
         <Input
           label="Nome completo"
           placeholder="Digite seu nome completo"
           mb4
+          value={name}
+          onChangeText={name => setName(name)}
         />
-        <Input label="E-mail" placeholder="Digite seu email" mb4 />
-        <Input label="Senha" placeholder="Digite sua senha" isObscure />
+        <Input
+          label="E-mail"
+          placeholder="Digite seu email"
+          mb4
+          value={email}
+          onChangeText={email => setEmail(email)}
+        />
+        <Input
+          label="Senha"
+          placeholder="Digite sua senha"
+          isObscure
+          value={password}
+          onChangeText={password => setPassword(password)}
+        />
       </View>
 
       <Button
